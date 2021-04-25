@@ -1,0 +1,35 @@
+Steps to setup nginx (reverse proxy) : 
+
+1. sudo apt install nginx
+2. sudo ufw app list ( too see possible apps )
+3. sudo ufw allow 'Nginx HTTP'   (port 80 only )
+4. sudo ufw status
+5. ip addr show (to find out ip address)
+	5a. sudo systemctl start nginx
+6. Enter ip address on your browser (You should see Nginx success page)
+7. Next few steps is to setup a static website on nginx server
+
+
+8. make a directory (preferably named www) and remember the absolute path of directory (pwd if u dont know)
+	8a. nano index.html (and type your desired page or <h1> Welcome </h1> )
+9. cd /etc/nginx (move to this directory)
+10. sudo mv nginx.conf nginx.conf.orignal (save this file as different name)
+11. sudo nano nginx.conf (create and edit new file)
+12. Enter the following :
+events{
+}
+
+
+http {
+        server {
+                location / {
+                        root ABSOLUTE_PATH(for ex: /home/www);
+                }
+        }
+}
+
+13.save the file
+14. sudo systemctl reload nginx
+15. head to your ip address in your browser 
+16. You should see your webpage which u created in index.html
+17. sudo systemctl stop nginx (to stop your server)
